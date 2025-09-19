@@ -20,34 +20,6 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- Suraksha AI Chatbot Widget -->
-<div id="suraksha-chatbot"></div>
-<script>
-  // Create iframe for the chatbot
-  const iframe = document.createElement('iframe');
-  iframe.src = 'https://b6126ccd-7080-4873-8ab0-8764d9714274.lovableproject.com/embed';
-  iframe.style.cssText = `
-    position: fixed !important;
-    bottom: 0 !important;
-    right: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    border: none !important;
-    pointer-events: none !important;
-    z-index: 999999 !important;
-    background: transparent !important;
-  `;
-  iframe.onload = function() {
-    // Allow interactions only on the widget area
-    iframe.style.pointerEvents = 'none';
-    iframe.contentWindow.document.addEventListener('click', function(e) {
-      if (e.target.closest('.chat-widget')) {
-        iframe.style.pointerEvents = 'all';
-      }
-    });
-  };
-  document.getElementById('suraksha-chatbot').appendChild(iframe);
-</script>
-<!-- End Suraksha AI Chatbot Widget -->
+   
   </body>
 </html>
