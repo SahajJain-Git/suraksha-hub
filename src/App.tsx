@@ -6,11 +6,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import StudentAuth from "./pages/StudentAuth";
-import TeacherAuth from "./pages/TeacherAuth";
+import Auth from "./pages/Auth";
 import VirtualDrills from "./pages/VirtualDrills";
 import FirstAid from "./pages/FirstAid";
 import Quiz from "./pages/Quiz";
+import ComprehensiveModules from "./pages/ComprehensiveModules";
 
 const queryClient = new QueryClient();
 
@@ -23,11 +23,13 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/student-auth" element={<StudentAuth />} />
-            <Route path="/teacher-auth" element={<TeacherAuth />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/student-auth" element={<Auth />} />
+            <Route path="/teacher-auth" element={<Auth />} />
             <Route path="/virtual-drills" element={<VirtualDrills />} />
             <Route path="/first-aid" element={<FirstAid />} />
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="/comprehensive-modules" element={<ComprehensiveModules />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

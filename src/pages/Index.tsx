@@ -38,10 +38,10 @@ const Index = () => {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <Button variant="outline" onClick={() => navigate('/student-auth')}>
+                  <Button variant="outline" onClick={() => navigate('/auth')}>
                     Sign In
                   </Button>
-                  <Button onClick={() => navigate('/teacher-auth')}>
+                  <Button onClick={() => navigate('/auth')}>
                     Sign Up
                   </Button>
                 </div>
@@ -64,7 +64,7 @@ const Index = () => {
             Learn, practice, and excel in emergency response through interactive training.
           </p>
           <div className="flex justify-center gap-4">
-            <Button size="lg" variant="secondary" className="text-lg px-8 py-3">
+            <Button size="lg" variant="secondary" className="text-lg px-8 py-3" onClick={() => navigate('/auth')}>
               Start Learning Free
             </Button>
             <Button size="lg" variant="outline" className="text-lg px-8 py-3 border-white text-white hover:bg-white hover:text-primary">
@@ -159,7 +159,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-lg transition-all duration-200">
+            <Card className="group hover:shadow-lg transition-all duration-200 cursor-pointer" onClick={() => navigate('/comprehensive-modules')}>
               <CardHeader>
                 <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                   <BookOpen className="w-8 h-8 text-green-600" />
@@ -173,28 +173,14 @@ const Index = () => {
                 <div className="border rounded-lg p-4 bg-blue-50">
                   <h4 className="font-semibold text-blue-800 mb-2">Class 6 & Above</h4>
                   <p className="text-sm text-blue-600">Advanced disaster management concepts and detailed emergency protocols</p>
-                  <Button variant="outline" size="sm" className="mt-2 text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white">
-                    Explore Advanced Modules
-                  </Button>
                 </div>
                 <div className="border rounded-lg p-4 bg-yellow-50">
                   <h4 className="font-semibold text-yellow-800 mb-2">Class 6 & Below</h4>
-                  <p className="text-sm text-yellow-600 mb-3">Fun and interactive safety resources for younger students</p>
-                  <div className="space-y-2">
-                    <a href="https://sesameworkshop.org/topics/emergencies/" target="_blank" rel="noopener noreferrer" className="block text-sm text-yellow-700 hover:text-yellow-900 underline">
-                      📚 Sesame Street Emergency Resources
-                    </a>
-                    <a href="https://inee.org/sites/default/files/resources/IFC_Disaster_Emergency_Prep_Schools_Guide_ENG.pdf" target="_blank" rel="noopener noreferrer" className="block text-sm text-yellow-700 hover:text-yellow-900 underline">
-                      📖 School Emergency Preparedness Guide
-                    </a>
-                    <a href="https://www.mcminnvilleoregon.gov/sites/default/files/fileattachments/fire/page/3321/kids_preparedness_guide.pdf" target="_blank" rel="noopener noreferrer" className="block text-sm text-yellow-700 hover:text-yellow-900 underline">
-                      🎒 Kids Preparedness Activity Guide
-                    </a>
-                    <a href="https://www.ready.gov/kids" target="_blank" rel="noopener noreferrer" className="block text-sm text-yellow-700 hover:text-yellow-900 underline">
-                      🏠 Ready.gov Kids Corner
-                    </a>
-                  </div>
+                  <p className="text-sm text-yellow-600">Fun and interactive safety resources for younger students</p>
                 </div>
+                <Button className="w-full group-hover:bg-green-600/90">
+                  Explore Modules <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
               </CardContent>
             </Card>
 

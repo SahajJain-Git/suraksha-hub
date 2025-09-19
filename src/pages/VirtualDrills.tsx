@@ -82,6 +82,126 @@ const drillSections = {
         order: 2
       }
     ]
+  },
+  flood: {
+    title: 'Flood Safety',
+    description: 'Essential flood preparedness and water safety techniques',
+    icon: '🌊',
+    color: 'bg-blue-500',
+    videos: [
+      {
+        id: 'flood1',
+        title: 'Understanding Flood Risks',
+        description: 'Learn about different types of floods and their dangers',
+        videoUrl: 'https://www.youtube.com/embed/pi_nUPcQz_A',
+        duration: '8:20',
+        order: 1
+      },
+      {
+        id: 'flood2',
+        title: 'Flood Safety Measures',
+        description: 'Essential safety measures during flooding events',
+        videoUrl: 'https://www.youtube.com/embed/UpHtw4LsusA',
+        duration: '6:45',
+        order: 2
+      },
+      {
+        id: 'flood3',
+        title: 'Flash Flood Response',
+        description: 'Quick response techniques for sudden flash floods',
+        videoUrl: 'https://www.youtube.com/embed/7dIE29lWJSE',
+        duration: '5:30',
+        order: 3
+      },
+      {
+        id: 'flood4',
+        title: 'Water Rescue Basics',
+        description: 'Basic water rescue techniques and safety',
+        videoUrl: 'https://www.youtube.com/embed/wqEKBkxS7QY',
+        duration: '7:15',
+        order: 4
+      }
+    ]
+  },
+  storm: {
+    title: 'Storm & Hurricane Safety',
+    description: 'Comprehensive storm preparedness and safety protocols',
+    icon: '🌪️',
+    color: 'bg-purple-500',
+    videos: [
+      {
+        id: 'storm1',
+        title: 'Storm Safety Guidelines',
+        description: 'Essential safety measures during severe storms',
+        videoUrl: 'https://www.youtube.com/embed/aCdLPJqAoUw',
+        duration: '9:30',
+        order: 1
+      },
+      {
+        id: 'storm2',
+        title: 'Hurricane Preparedness',
+        description: 'Complete guide to hurricane preparation and response',
+        videoUrl: 'https://www.youtube.com/embed/yOP0g_flrlU',
+        duration: '12:15',
+        order: 2
+      },
+      {
+        id: 'storm3',
+        title: 'Tornado Safety',
+        description: 'Tornado safety procedures and shelter techniques',
+        videoUrl: 'https://www.youtube.com/embed/PMrwxtOBHb0',
+        duration: '6:50',
+        order: 3
+      },
+      {
+        id: 'storm4',
+        title: 'Severe Weather Alerts',
+        description: 'Understanding weather warnings and alert systems',
+        videoUrl: 'https://www.youtube.com/embed/tai7mDa-7bo',
+        duration: '5:25',
+        order: 4
+      },
+      {
+        id: 'storm5',
+        title: 'Storm Aftermath Safety',
+        description: 'Post-storm safety and recovery procedures',
+        videoUrl: 'https://www.youtube.com/embed/K9r0Y3UZoU4',
+        duration: '8:40',
+        order: 5
+      }
+    ]
+  },
+  thunder: {
+    title: 'Lightning & Thunder Safety',
+    description: 'Lightning safety and thunderstorm protection measures',
+    icon: '⚡',
+    color: 'bg-yellow-500',
+    videos: [
+      {
+        id: 'thunder1',
+        title: 'Lightning Safety Basics',
+        description: 'Understanding lightning risks and basic safety measures',
+        videoUrl: 'https://www.youtube.com/embed/hgJzCUEXOuc',
+        duration: '7:10',
+        order: 1
+      },
+      {
+        id: 'thunder2',
+        title: 'When Thunder Roars, Go Indoors',
+        description: 'The 30-30 rule and indoor safety during thunderstorms',
+        videoUrl: 'https://www.youtube.com/embed/tai7mDa-7bo',
+        duration: '5:40',
+        order: 2
+      },
+      {
+        id: 'thunder3',
+        title: 'Lightning Strike Response',
+        description: 'What to do if someone is struck by lightning',
+        videoUrl: 'https://www.youtube.com/embed/aCdLPJqAoUw',
+        duration: '6:20',
+        order: 3
+      }
+    ]
   }
 };
 
