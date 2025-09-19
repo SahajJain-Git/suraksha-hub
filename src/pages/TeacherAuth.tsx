@@ -13,7 +13,12 @@ interface TeacherFormData {
   email: string;
   password: string;
   fullName?: string;
+  designation?: string;
+  phoneNumber?: string;
   institution?: string;
+  department?: string;
+  experience?: string;
+  qualification?: string;
 }
 
 const TeacherAuth = () => {
@@ -27,7 +32,12 @@ const TeacherAuth = () => {
       email: '',
       password: '',
       fullName: '',
+      designation: '',
+      phoneNumber: '',
       institution: '',
+      department: '',
+      experience: '',
+      qualification: '',
     },
   });
 
@@ -39,7 +49,14 @@ const TeacherAuth = () => {
         const result = await signIn(data.email, data.password);
         error = result.error;
       } else {
-        const result = await signUp(data.email, data.password, 'teacher', data.fullName);
+        const result = await signUp(data.email, data.password, 'teacher', data.fullName, {
+          designation: data.designation,
+          phoneNumber: data.phoneNumber,
+          institution: data.institution,
+          department: data.department,
+          experience: data.experience,
+          qualification: data.qualification,
+        });
         error = result.error;
       }
 
@@ -96,9 +113,111 @@ const TeacherAuth = () => {
                     name="fullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Full Name</FormLabel>
+                        <FormLabel>Faculty Name</FormLabel>
                         <FormControl>
                           <Input placeholder="Enter your full name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="designation"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Designation</FormLabel>
+                        <FormControl>
+                          <select 
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            {...field}
+                          >
+                            <option value="">Select your designation</option>
+                            <option value="Professor">Professor</option>
+                            <option value="Associate Professor">Associate Professor</option>
+                            <option value="Assistant Professor">Assistant Professor</option>
+                            <option value="Lecturer">Lecturer</option>
+                            <option value="Principal">Principal</option>
+                            <option value="Vice Principal">Vice Principal</option>
+                            <option value="Head of Department">Head of Department</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Senior Teacher">Senior Teacher</option>
+                            <option value="Primary Teacher">Primary Teacher</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="department"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Department/Subject</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your department or subject" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="qualification"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Qualification</FormLabel>
+                        <FormControl>
+                          <select 
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            {...field}
+                          >
+                            <option value="">Select your qualification</option>
+                            <option value="PhD">PhD</option>
+                            <option value="M.Tech">M.Tech</option>
+                            <option value="M.Ed">M.Ed</option>
+                            <option value="M.A">M.A</option>
+                            <option value="M.Sc">M.Sc</option>
+                            <option value="M.Com">M.Com</option>
+                            <option value="MBA">MBA</option>
+                            <option value="B.Tech">B.Tech</option>
+                            <option value="B.Ed">B.Ed</option>
+                            <option value="B.A">B.A</option>
+                            <option value="B.Sc">B.Sc</option>
+                            <option value="B.Com">B.Com</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="experience"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Years of Experience</FormLabel>
+                        <FormControl>
+                          <select 
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            {...field}
+                          >
+                            <option value="">Select your experience</option>
+                            <option value="0-1 years">0-1 years</option>
+                            <option value="1-3 years">1-3 years</option>
+                            <option value="3-5 years">3-5 years</option>
+                            <option value="5-10 years">5-10 years</option>
+                            <option value="10-15 years">10-15 years</option>
+                            <option value="15-20 years">15-20 years</option>
+                            <option value="20+ years">20+ years</option>
+                          </select>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -110,9 +229,23 @@ const TeacherAuth = () => {
                     name="institution"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Institution</FormLabel>
+                        <FormLabel>Institution Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter your school/institution name" {...field} />
+                          <Input placeholder="Enter your institution name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="phoneNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone Number</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your phone number" type="tel" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

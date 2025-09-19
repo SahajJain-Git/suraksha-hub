@@ -301,34 +301,58 @@ export type Database = {
       profiles: {
         Row: {
           avatar_url: string | null
+          city: string | null
           created_at: string
+          designation: string | null
+          enrollment_number: string | null
           full_name: string | null
           grade_level: string | null
           id: string
+          institute_email: string | null
+          institute_location: string | null
+          institute_name: string | null
           institution: string | null
+          phone_number: string | null
           role: string
+          state: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           avatar_url?: string | null
+          city?: string | null
           created_at?: string
+          designation?: string | null
+          enrollment_number?: string | null
           full_name?: string | null
           grade_level?: string | null
           id?: string
+          institute_email?: string | null
+          institute_location?: string | null
+          institute_name?: string | null
           institution?: string | null
+          phone_number?: string | null
           role?: string
+          state?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           avatar_url?: string | null
+          city?: string | null
           created_at?: string
+          designation?: string | null
+          enrollment_number?: string | null
           full_name?: string | null
           grade_level?: string | null
           id?: string
+          institute_email?: string | null
+          institute_location?: string | null
+          institute_name?: string | null
           institution?: string | null
+          phone_number?: string | null
           role?: string
+          state?: string | null
           updated_at?: string
           user_id?: string
         }

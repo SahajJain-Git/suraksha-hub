@@ -166,9 +166,36 @@ const Index = () => {
                 </div>
                 <CardTitle className="text-xl">Comprehensive Modules</CardTitle>
                 <CardDescription>
-                  Structured learning paths for all disaster types
+                  Age-appropriate learning resources for different educational levels
                 </CardDescription>
               </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="border rounded-lg p-4 bg-blue-50">
+                  <h4 className="font-semibold text-blue-800 mb-2">Class 6 & Above</h4>
+                  <p className="text-sm text-blue-600">Advanced disaster management concepts and detailed emergency protocols</p>
+                  <Button variant="outline" size="sm" className="mt-2 text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white">
+                    Explore Advanced Modules
+                  </Button>
+                </div>
+                <div className="border rounded-lg p-4 bg-yellow-50">
+                  <h4 className="font-semibold text-yellow-800 mb-2">Class 6 & Below</h4>
+                  <p className="text-sm text-yellow-600 mb-3">Fun and interactive safety resources for younger students</p>
+                  <div className="space-y-2">
+                    <a href="https://sesameworkshop.org/topics/emergencies/" target="_blank" rel="noopener noreferrer" className="block text-sm text-yellow-700 hover:text-yellow-900 underline">
+                      📚 Sesame Street Emergency Resources
+                    </a>
+                    <a href="https://inee.org/sites/default/files/resources/IFC_Disaster_Emergency_Prep_Schools_Guide_ENG.pdf" target="_blank" rel="noopener noreferrer" className="block text-sm text-yellow-700 hover:text-yellow-900 underline">
+                      📖 School Emergency Preparedness Guide
+                    </a>
+                    <a href="https://www.mcminnvilleoregon.gov/sites/default/files/fileattachments/fire/page/3321/kids_preparedness_guide.pdf" target="_blank" rel="noopener noreferrer" className="block text-sm text-yellow-700 hover:text-yellow-900 underline">
+                      🎒 Kids Preparedness Activity Guide
+                    </a>
+                    <a href="https://www.ready.gov/kids" target="_blank" rel="noopener noreferrer" className="block text-sm text-yellow-700 hover:text-yellow-900 underline">
+                      🏠 Ready.gov Kids Corner
+                    </a>
+                  </div>
+                </div>
+              </CardContent>
             </Card>
 
             <Card className="group hover:shadow-lg transition-all duration-200">

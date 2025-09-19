@@ -5,7 +5,7 @@ import { supabase } from '@/integrations/supabase/client';
 interface AuthContextType {
   user: User | null;
   session: Session | null;
-  signUp: (email: string, password: string, role: 'student' | 'teacher', fullName?: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, role: 'student' | 'teacher', fullName?: string, additionalData?: any) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
   loading: boolean;
@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string, role: 'student' | 'teacher', fullName?: string) => {
+  const signUp = async (email: string, password: string, role: 'student' | 'teacher', fullName?: string, additionalData?: any) => {
     const redirectUrl = `${window.location.origin}/`;
     
     const { error } = await supabase.auth.signUp({
@@ -56,7 +56,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         emailRedirectTo: redirectUrl,
         data: {
           role,
-          full_name: fullName
+          full_name: fullName,
+          ...additionalData
         }
       }
     });

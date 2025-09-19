@@ -13,6 +13,13 @@ interface StudentFormData {
   email: string;
   password: string;
   fullName?: string;
+  phoneNumber?: string;
+  instituteName?: string;
+  instituteLocation?: string;
+  enrollmentNumber?: string;
+  state?: string;
+  city?: string;
+  instituteEmail?: string;
 }
 
 const StudentAuth = () => {
@@ -26,8 +33,37 @@ const StudentAuth = () => {
       email: '',
       password: '',
       fullName: '',
+      phoneNumber: '',
+      instituteName: '',
+      instituteLocation: '',
+      enrollmentNumber: '',
+      state: '',
+      city: '',
+      instituteEmail: '',
     },
   });
+
+  // Indian states list
+  const indianStates = [
+    'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
+    'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka',
+    'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram',
+    'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
+    'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
+    'Delhi', 'Jammu and Kashmir', 'Ladakh', 'Puducherry', 'Chandigarh',
+    'Dadra and Nagar Haveli', 'Daman and Diu', 'Lakshadweep'
+  ];
+
+  // Major cities list (you can expand this)
+  const indianCities = [
+    'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Ahmedabad', 'Chennai',
+    'Kolkata', 'Surat', 'Pune', 'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur',
+    'Indore', 'Thane', 'Bhopal', 'Visakhapatnam', 'Pimpri & Chinchwad',
+    'Patna', 'Vadodara', 'Ghaziabad', 'Ludhiana', 'Agra', 'Nashik',
+    'Faridabad', 'Meerut', 'Rajkot', 'Kalyan & Dombivali', 'Vasai Virar',
+    'Varanasi', 'Srinagar', 'Dhanbad', 'Jodhpur', 'Amritsar', 'Raipur',
+    'Allahabad', 'Coimbatore', 'Jabalpur', 'Gwalior', 'Vijayawada'
+  ];
 
   const onSubmit = async (data: StudentFormData) => {
     try {
@@ -37,7 +73,15 @@ const StudentAuth = () => {
         const result = await signIn(data.email, data.password);
         error = result.error;
       } else {
-        const result = await signUp(data.email, data.password, 'student', data.fullName);
+        const result = await signUp(data.email, data.password, 'student', data.fullName, {
+          phoneNumber: data.phoneNumber,
+          instituteName: data.instituteName,
+          instituteLocation: data.instituteLocation,
+          enrollmentNumber: data.enrollmentNumber,
+          state: data.state,
+          city: data.city,
+          instituteEmail: data.instituteEmail,
+        });
         error = result.error;
       }
 
@@ -88,19 +132,135 @@ const StudentAuth = () => {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               {!isLogin && (
-                <FormField
-                  control={form.control}
-                  name="fullName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Full Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter your full name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <>
+                  <FormField
+                    control={form.control}
+                    name="fullName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Student Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your full name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="instituteName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Institute Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your institute name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="instituteLocation"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Institute Location</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter institute location" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="enrollmentNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Enrollment Number</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your enrollment number" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="state"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>State</FormLabel>
+                        <FormControl>
+                          <select 
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            {...field}
+                          >
+                            <option value="">Select your state</option>
+                            {indianStates.map(state => (
+                              <option key={state} value={state}>{state}</option>
+                            ))}
+                          </select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="city"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>City</FormLabel>
+                        <FormControl>
+                          <select 
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            {...field}
+                          >
+                            <option value="">Select your city</option>
+                            {indianCities.map(city => (
+                              <option key={city} value={city}>{city}</option>
+                            ))}
+                          </select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="instituteEmail"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Institute Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter institute email" type="email" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="phoneNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone Number</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your phone number" type="tel" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </>
               )}
               
               <FormField
@@ -108,9 +268,9 @@ const StudentAuth = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Personal Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your email" type="email" {...field} />
+                      <Input placeholder="Enter your personal email" type="email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
