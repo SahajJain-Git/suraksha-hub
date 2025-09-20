@@ -4,11 +4,19 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Shield, GraduationCap, BookOpen, Play, Heart, Brain, Users, TrendingUp, Award, ArrowRight } from 'lucide-react';
+import { Shield, GraduationCap, BookOpen, Play, Heart, Brain, Users, TrendingUp, Award, ArrowRight, User, ChevronDown } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 const Index = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+
+  const getUserDashboard = () => {
+    // For now, we'll check user metadata to determine role
+    // In a real app, you might want to fetch this from the profile
+    const role = user?.user_metadata?.role || 'student';
+    return role === 'teacher' ? '/teacher-dashboard' : '/student-dashboard';
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -32,9 +40,24 @@ const Index = () => {
               {user ? (
                 <div className="flex items-center gap-4">
                   <span className="text-sm text-muted-foreground">Welcome back!</span>
-                  <Button variant="outline" onClick={() => signOut()}>
-                    Sign Out
-                  </Button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" className="flex items-center gap-2">
+                        <User className="w-4 h-4" />
+                        Profile
+                        <ChevronDown className="w-4 h-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-48">
+                      <DropdownMenuItem onClick={() => navigate(getUserDashboard())}>
+                        <User className="w-4 h-4 mr-2" />
+                        Dashboard
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => signOut()}>
+                        Sign Out
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
