@@ -4,11 +4,8 @@ import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Trophy, Award, BookOpen, Target, Edit, Save, X } from 'lucide-react';
+import { Trophy, Award, BookOpen, Target } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
 
 interface UserProfile {
   full_name: string;
@@ -17,7 +14,6 @@ interface UserProfile {
   enrollment_number: string;
   state: string;
   city: string;
-  institute_email: string;
 }
 
 interface DrillProgress {
@@ -53,8 +49,6 @@ const StudentDashboard = () => {
   const [quizProgress, setQuizProgress] = useState<QuizProgress[]>([]);
   const [badges, setBadges] = useState<BadgeData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isEditingProfile, setIsEditingProfile] = useState(false);
-  const [editedProfile, setEditedProfile] = useState<UserProfile | null>(null);
 
   useEffect(() => {
     if (user) {
@@ -188,50 +182,6 @@ const StudentDashboard = () => {
     return Math.round(drillProgressPercent + quizProgressPercent);
   };
 
-  const handleEditProfile = () => {
-    setEditedProfile(profile);
-    setIsEditingProfile(true);
-  };
-
-  const handleSaveProfile = async () => {
-    if (!editedProfile || !user) return;
-
-    try {
-      const { error } = await supabase
-        .from('profiles')
-        .update({
-          full_name: editedProfile.full_name,
-          institute_name: editedProfile.institute_name,
-          enrollment_number: editedProfile.enrollment_number,
-          state: editedProfile.state,
-          city: editedProfile.city,
-          institute_email: editedProfile.institute_email
-        })
-        .eq('user_id', user.id);
-
-      if (error) throw error;
-
-      setProfile(editedProfile);
-      setIsEditingProfile(false);
-      toast({
-        title: "Success",
-        description: "Profile updated successfully"
-      });
-    } catch (error) {
-      console.error('Error updating profile:', error);
-      toast({
-        title: "Error",
-        description: "Failed to update profile",
-        variant: "destructive"
-      });
-    }
-  };
-
-  const handleCancelEdit = () => {
-    setEditedProfile(null);
-    setIsEditingProfile(false);
-  };
-
   if (loading) {
     return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
   }
@@ -250,111 +200,26 @@ const StudentDashboard = () => {
         {/* Profile Summary */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5" />
-                Student Profile
-              </div>
-              {!isEditingProfile ? (
-                <Button variant="outline" size="sm" onClick={handleEditProfile}>
-                  <Edit className="h-4 w-4 mr-2" />
-                  Edit Profile
-                </Button>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" onClick={handleSaveProfile}>
-                    <Save className="h-4 w-4 mr-2" />
-                    Save
-                  </Button>
-                  <Button variant="outline" size="sm" onClick={handleCancelEdit}>
-                    <X className="h-4 w-4 mr-2" />
-                    Cancel
-                  </Button>
-                </div>
-              )}
+            <CardTitle className="flex items-center gap-2">
+              <BookOpen className="h-5 w-5" />
+              Student Profile
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {!isEditingProfile ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Full Name</p>
-                  <p className="font-semibold">{profile?.full_name || 'Not provided'}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Institute</p>
-                  <p className="font-semibold">{profile?.institute_name || 'Not provided'}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Enrollment Number</p>
-                  <p className="font-semibold">{profile?.enrollment_number || 'Not provided'}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">State</p>
-                  <p className="font-semibold">{profile?.state || 'Not provided'}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">City</p>
-                  <p className="font-semibold">{profile?.city || 'Not provided'}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Institute Email</p>
-                  <p className="font-semibold">{profile?.institute_email || 'Not provided'}</p>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <p className="text-sm text-gray-600">Institute</p>
+                <p className="font-semibold">{profile?.institute_name}</p>
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="full_name">Full Name</Label>
-                  <Input
-                    id="full_name"
-                    value={editedProfile?.full_name || ''}
-                    onChange={(e) => setEditedProfile(prev => prev ? {...prev, full_name: e.target.value} : null)}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="institute_name">Institute Name</Label>
-                  <Input
-                    id="institute_name"
-                    value={editedProfile?.institute_name || ''}
-                    onChange={(e) => setEditedProfile(prev => prev ? {...prev, institute_name: e.target.value} : null)}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="enrollment_number">Enrollment Number</Label>
-                  <Input
-                    id="enrollment_number"
-                    value={editedProfile?.enrollment_number || ''}
-                    onChange={(e) => setEditedProfile(prev => prev ? {...prev, enrollment_number: e.target.value} : null)}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="state">State</Label>
-                  <Input
-                    id="state"
-                    value={editedProfile?.state || ''}
-                    onChange={(e) => setEditedProfile(prev => prev ? {...prev, state: e.target.value} : null)}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="city">City</Label>
-                  <Input
-                    id="city"
-                    value={editedProfile?.city || ''}
-                    onChange={(e) => setEditedProfile(prev => prev ? {...prev, city: e.target.value} : null)}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="institute_email">Institute Email</Label>
-                  <Input
-                    id="institute_email"
-                    type="email"
-                    value={editedProfile?.institute_email || ''}
-                    onChange={(e) => setEditedProfile(prev => prev ? {...prev, institute_email: e.target.value} : null)}
-                  />
-                </div>
+              <div>
+                <p className="text-sm text-gray-600">Enrollment Number</p>
+                <p className="font-semibold">{profile?.enrollment_number}</p>
               </div>
-            )}
+              <div>
+                <p className="text-sm text-gray-600">Location</p>
+                <p className="font-semibold">{profile?.city}, {profile?.state}</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
