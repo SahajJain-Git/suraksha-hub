@@ -11,6 +11,8 @@ import VirtualDrills from "./pages/VirtualDrills";
 import FirstAid from "./pages/FirstAid";
 import Quiz from "./pages/Quiz";
 import ComprehensiveModules from "./pages/ComprehensiveModules";
+import StudentDashboard from "./pages/StudentDashboard";
+import TeacherDashboard from "./pages/TeacherDashboard";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,8 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/student-auth" element={<Auth />} />
             <Route path="/teacher-auth" element={<Auth />} />
+            <Route path="/student-dashboard" element={<StudentDashboard />} />
+            <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
             <Route path="/virtual-drills" element={<VirtualDrills />} />
             <Route path="/first-aid" element={<FirstAid />} />
             <Route path="/quiz" element={<Quiz />} />

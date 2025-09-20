@@ -129,7 +129,7 @@ const Auth = () => {
           description: isLogin ? "You've successfully signed in." : "Please check your email to verify your account.",
         });
         if (isLogin) {
-          navigate('/');
+          navigate('/student-dashboard');
         }
       }
     } catch (error) {
@@ -174,7 +174,7 @@ const Auth = () => {
           description: isLogin ? "You've successfully signed in." : "Please check your email to verify your account.",
         });
         if (isLogin) {
-          navigate('/');
+          navigate('/teacher-dashboard');
         }
       }
     } catch (error) {
